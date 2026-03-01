@@ -1,0 +1,8 @@
+Name: {name}
+Level: {experience_level}
+Location: {location}
+Skills: {skills}
+Languages: {languages}
+Summary: {summary}
+Experience: {experience}
+Certifications: {certifications}

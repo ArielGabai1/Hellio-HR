@@ -1,0 +1,88 @@
+HR Workflow Rules
+Edit this file to change agent behavior without code changes.
+
+== Candidate Workflow ==
+
+Validation checklist (check each item):
+- [REQUIRED] CV attachment (PDF/DOCX) -- if missing, use template B1
+- [REQUIRED] Sender email (for reply)
+- [RECOMMENDED] Target position -- if unclear, use template B2 listing open positions
+- [RECOMMENDED] Phone number -- if missing after ingestion, use template B3
+- [RECOMMENDED] Current location
+- [RECOMMENDED] Availability / notice period
+
+Processing steps:
+1. Download and ingest CV via ingest_candidate
+2. Run find_matching_positions to assess fit
+3. Evaluate match quality (see below)
+4. Notify with event type and entity_id
+5. Draft appropriate reply based on match quality
+
+Match quality (based on suggestion scores):
+- Strong (score >= 0.8): Use template B4. Also notify hiring manager (template B8).
+- Potential (score >= 0.6): Use template B5.
+- Weak but alternatives exist: Use template B6, suggest better-fit positions.
+- Weak, no alternatives: Use template B7, keep on file.
+
+Draft templates for candidates:
+- B1: "CV Needed - {position_title} Application" -- request missing CV
+- B2: "Clarification Needed - Your Application to Hellio" -- ask which position, list open roles
+- B3: "Contact Information Needed - {position_title} Application" -- request phone/LinkedIn
+- B4: "Your Application for {position_title} - Next Steps" -- enthusiastic, explain hiring timeline
+- B5: "Your Application for {position_title} - Under Review" -- positive but realistic
+- B6: "Alternative Opportunities - {position_title}" -- explain mismatch, suggest alternatives
+- B7: "Thank You for Your Application - {position_title}" -- courteous decline, keep on file
+- B8: "Strong Candidate for {position_title} - {candidate_name}" -- alert hiring manager
+
+== Position Workflow ==
+
+Validation checklist (check each item):
+- [REQUIRED] Job title -- clear, specific role name
+- [REQUIRED] Responsibilities -- at least 3-5 main duties
+- [REQUIRED] Required skills or tech stack
+- [RECOMMENDED] Department/team
+- [RECOMMENDED] Employment type (full-time, part-time, contract)
+- [RECOMMENDED] Location and work arrangement (remote/hybrid/on-site)
+- [RECOMMENDED] Experience level (junior, mid, senior, or years)
+- [RECOMMENDED] Nice-to-have skills
+- [RECOMMENDED] Salary range / compensation budget
+- [RECOMMENDED] Timeline / urgency
+- [RECOMMENDED] Hiring manager name and contact
+- [RECOMMENDED] Education requirements
+
+If critical [REQUIRED] items are missing, use template A1 before ingesting.
+If all required items present, ingest the position.
+
+Processing steps:
+1. Check if job description file is attached; if not, use email body text
+2. Ingest via ingest_position
+3. Run find_matching_candidates
+4. Notify with event type and entity_id
+5. Draft confirmation to hiring manager (template A2)
+6. Draft social media post for the position (template A3)
+
+Social media post guidelines (included in A3 draft):
+- Opening hook: attention-grabbing first line
+- Role highlights: 2-3 key responsibilities or exciting aspects
+- Ideal candidate: brief profile of who would thrive
+- Call to action: how to apply
+- Tone: professional but engaging, avoid corporate jargon
+- Length: 150-200 words
+
+Draft templates for hiring managers:
+- A1: "Additional Information Needed - {job_title} Position" -- request missing details, explain why each is needed
+- A2: "Confirmation - {job_title} Position Ready for Sourcing" -- summarize position, next steps, timeline
+- A3: "{job_title} Position Active - {match_count} Potential Candidates" -- share candidate matches + draft social media post for approval
+
+== General ==
+
+Response timing: urgent = same-day, standard = within 24 hours, follow-up = within 48 hours.
+
+Communication principles:
+- Personalize all communications with specific details from the email
+- Never send templates with placeholder text visible
+- Use candidate/manager names, not generic greetings
+- Be specific about timelines ("within 3-5 business days")
+- End with clear next actions for the recipient
+- Tone for hiring managers: professional, efficient, action-oriented
+- Tone for candidates: warm, encouraging, transparent, respectful

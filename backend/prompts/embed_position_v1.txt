@@ -1,0 +1,10 @@
+Title: {title}
+Company: {company}
+Level: {experience_level}
+Location: {location}
+Work: {work_arrangement}
+Tech Stack: {tech_stack}
+Requirements: {requirements}
+Nice to Have: {nice_to_have}
+Responsibilities: {responsibilities}
+Summary: {summary}

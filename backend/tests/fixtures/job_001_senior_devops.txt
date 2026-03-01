@@ -1,0 +1,35 @@
+From: Sarah Chen <sarah.chen@company.com>
+To: hr@hellio.com
+Subject: Urgent - Senior DevOps Engineer Needed
+
+Hi Hellio Team,
+
+We need to fill a Senior DevOps Engineer position ASAP. Our infrastructure team is overloaded and we're scaling fast.
+
+Key requirements:
+- 5+ years hands-on DevOps experience
+- Strong AWS expertise (we're all-in on AWS)
+- Kubernetes - production experience is a must, not just theory
+- Terraform for IaC - we manage everything as code
+- CI/CD pipelines (we use GitLab CI primarily)
+- Python or Go for automation scripting
+
+Nice to have:
+- Experience with monitoring stacks (we use Prometheus + Grafana)
+- AWS certifications (Solutions Architect or DevOps Engineer)
+- Experience with microservices architectures
+- On-call experience with incident management
+
+The role:
+- Leading infrastructure automation initiatives
+- Mentoring 2-3 junior engineers
+- Architecting our migration to EKS
+- On-call rotation (1 week per month)
+
+We're a fast-paced fintech startup, Series B funded. Hybrid work (3 days office in Tel Aviv). Competitive salary + equity.
+
+Timeline: Need to hire within 4 weeks if possible. Can you start sourcing candidates?
+
+Thanks,
+Sarah Chen
+VP Engineering

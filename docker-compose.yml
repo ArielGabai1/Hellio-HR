@@ -1,0 +1,85 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg18
+    environment:
+      POSTGRES_DB: hellio
+      POSTGRES_USER: hellio
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - ./backend/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hellio -d hellio"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    networks:
+      - backend
+
+  hellio-hr:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql://hellio:${DB_PASSWORD}@postgres:5432/hellio
+      JWT_SECRET: ${JWT_SECRET}
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:-}
+    volumes:
+      - ./logs:/data/logs
+      - cvsjobs:/data/CVsJobs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:8000/api/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    networks:
+      - backend
+      - frontend
+
+  nginx:
+    image: nginx:1.29-alpine
+    ports:
+      - "80:80"
+    depends_on:
+      hellio-hr:
+        condition: service_healthy
+    volumes:
+      - ./static:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - frontend
+
+  agent:
+    build: ./agent
+    depends_on:
+      hellio-hr:
+        condition: service_healthy
+    volumes:
+      - ~/.gmail-mcp:/home/agent/.gmail-mcp:ro
+    environment:
+      BACKEND_URL: http://hellio-hr:8000
+      GMAIL_TARGET_ADDRESS: ${GMAIL_TARGET_ADDRESS}
+      SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL:-}
+      POLL_INTERVAL_SECONDS: ${POLL_INTERVAL_SECONDS:-300}
+      MAX_AGENT_ITERATIONS: ${MAX_AGENT_ITERATIONS:-10}
+      AWS_REGION: ${AWS_REGION}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:-}
+    restart: unless-stopped
+    networks:
+      - backend
+
+networks:
+  backend:
+  frontend:
+
+volumes:
+  pgdata:
+  cvsjobs:

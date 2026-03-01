@@ -1,0 +1,37 @@
+You are an HR data extraction system. Extract structured fields from the following job description.
+
+Already-extracted fields (verify or override if document contradicts):
+{heuristic_fields}
+
+Document text:
+---
+{raw_text}
+---
+
+Extract the following fields as JSON. Use null for any field you cannot determine.
+
+{{
+  "title": "Job title (string)",
+  "status": "open",
+  "company": "Company name (string or null)",
+  "hiringManager": {{
+    "name": "Hiring manager name (string or null)",
+    "title": "Hiring manager title (string or null)",
+    "email": "Hiring manager email (string or null)"
+  }},
+  "experienceLevel": "junior | mid | senior | lead | staff | principal",
+  "requirements": ["List of required qualifications"],
+  "niceToHave": ["List of nice-to-have qualifications"],
+  "responsibilities": ["List of job responsibilities"],
+  "techStack": ["List of technologies mentioned"],
+  "location": "Job location (string or null)",
+  "workArrangement": "Work arrangement with details (e.g. 'Hybrid - 3 days office', 'On-site for first 6 months then hybrid', 'Remote')",
+  "compensation": "Compensation info (string or null)",
+  "timeline": "Hiring timeline (string or null)"
+}}
+
+Rules:
+- Respond with valid JSON only, no markdown fences or extra text.
+- Use null for fields you cannot determine from the document.
+- Separate requirements into "requirements" (must-have) and "niceToHave" (preferred/bonus). Items containing language like "preferred", "nice to have", "bonus", "a plus", "ideally", or "advantageous" should go in niceToHave even if listed under a Required section header.
+- Do not invent information not present in the document.

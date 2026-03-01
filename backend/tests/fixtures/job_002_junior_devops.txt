@@ -1,0 +1,39 @@
+From: Michael Goldberg <m.goldberg@techcorp.co.il>
+To: hr@hellio.com
+Subject: Entry-Level DevOps Position
+
+Hello,
+
+Looking for a junior DevOps engineer to join our growing team. This is a great opportunity for someone starting their career or transitioning into DevOps.
+
+What we need:
+- 0-2 years experience (fresh graduates welcome!)
+- Basic understanding of Linux systems
+- Some scripting knowledge (Bash, Python preferred)
+- Familiarity with Docker basics
+- Willingness to learn and grow
+
+What we'll teach:
+- Kubernetes and container orchestration
+- CI/CD best practices
+- Cloud platforms (we use Azure)
+- Infrastructure as Code with Terraform
+- Monitoring and observability
+
+About the role:
+This person will work closely with our senior DevOps team, helping with day-to-day operations, automation tasks, and learning production systems management. We believe in mentorship and will invest in training.
+
+Requirements:
+- B.Sc in Computer Science or related field (or equivalent experience)
+- Good communication skills
+- Problem-solving mindset
+- Hebrew and English fluency
+
+Work arrangement: Full-time, office-based in Herzliya for first 6 months, then hybrid.
+Salary range: 12,000-15,000 NIS/month depending on experience.
+
+Not urgent, but would like to interview candidates in the next 2-3 weeks.
+
+Best,
+Michael Goldberg
+CTO, TechCorp

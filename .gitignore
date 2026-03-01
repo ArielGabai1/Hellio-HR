@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Playwright
+test-results/
+playwright/.cache/
+.playwright*
+tests/.auth/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Docker
+pgdata/
+
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Editor
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+/.claude
+CLAUDE.md
+.playwright-mcp/
+/Submissions
+
+# Extraction logs
+logs/
+
+# Raw CV/Job files
+CVsJobs/
+
+# Environment
+.env

@@ -1,0 +1,12 @@
+Write a 2-3 sentence professional summary of the following candidate based on their CV/resume.
+
+Document text:
+---
+{raw_text}
+---
+
+Rules:
+- Be factual and concise. Only mention what is in the document.
+- Focus on years of experience, key skills, and domain expertise.
+- No promotional language. No invented details.
+- Respond with the summary text only, no JSON or formatting.
